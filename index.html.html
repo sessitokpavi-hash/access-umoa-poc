@@ -1,0 +1,79 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ACCESS UMOA — POC</title><style>
+:root{--n:#17324D;--b:#2D5F85;--g:#B08A3E;--l:#EAF1F6;--x:#3F4A54}
+*{box-sizing:border-box}body{margin:0;background:#eef2f5;font-family:Arial,sans-serif;color:var(--x)}
+.wrap{min-height:100vh;display:grid;place-items:center;padding:18px}.phone{width:390px;min-height:780px;background:white;border-radius:30px;box-shadow:0 12px 45px #0002;overflow:hidden;position:relative}
+.s{display:none;min-height:780px;padding:28px 22px 88px}.s.on{display:block}.hero{background:linear-gradient(150deg,#061f43,#0d3769);color:white;text-align:center;padding-top:80px}
+.logo{font-size:37px;font-weight:800}.logo i{font-style:normal;color:#d4a33c}.tag{font-size:20px;line-height:1.4;margin:38px 12px}.promise{text-align:left;line-height:2.2;margin:35px}
+h1{color:var(--n);font-size:25px}p{line-height:1.45}.muted{color:#6c7780;font-size:13px}.top{color:var(--n);font-weight:bold;font-size:16px}.back{font-size:25px;cursor:pointer;margin-right:10px}
+.btn{width:100%;padding:15px;border:0;border-radius:10px;margin-top:13px;font-weight:bold;cursor:pointer}.primary{background:var(--n);color:white}.gold{background:#c99a35;color:white}.outline{background:white;color:var(--n);border:1px solid var(--b)}
+.cards{display:grid;gap:10px}.card,.amtbox{border:1px solid #dce2e7;border-radius:11px;padding:15px;cursor:pointer}.card.sel,.amtbox.sel{border:2px solid var(--n);background:#f4f8fc}.card b{color:var(--n)}
+.amounts{display:grid;grid-template-columns:1fr 1fr;gap:10px}.amtbox{text-align:center;font-weight:bold;color:var(--n);font-size:17px}.amtbox.sel{background:var(--n);color:white}
+.note{background:#f1f6ff;color:#315f9b;border-radius:10px;padding:12px;font-size:12px;margin:18px 0}
+.confirm{background:linear-gradient(150deg,#061f43,#0d3769);color:white;text-align:center}.confirm h1{color:white}.check{font-size:55px;color:#d4a33c;margin-top:55px}
+.panel{background:white;color:var(--x);border-radius:12px;padding:15px;text-align:left}.row{display:flex;justify-content:space-between;border-bottom:1px solid #e6e9ec;padding:12px 2px;font-size:13px}
+.head{background:linear-gradient(150deg,#061f43,#0d3769);color:white;border-radius:12px;text-align:center;padding:20px}.value{font-size:28px;font-weight:bold;margin:8px}.green{color:#15916a;font-weight:bold}
+.donut{width:180px;height:180px;border-radius:50%;margin:25px auto;background:conic-gradient(#315fbd 0 40%,#60a0e8 40% 70%,#d6a33a 70% 90%,#59b995 90%);position:relative}.donut:after{content:"127 450\A FCFA";white-space:pre;position:absolute;inset:38px;border-radius:50%;background:white;display:grid;place-items:center;text-align:center;color:var(--n);font-weight:bold}
+.sim{text-align:center;border:1px solid #dce2e7;border-radius:12px;padding:18px}.big{font-size:22px;color:var(--n);font-weight:bold;margin:8px}.scenario{display:flex;justify-content:space-between;border:1px solid #dce2e7;border-radius:9px;padding:12px;margin-top:9px;font-size:12px}
+.nav{position:absolute;bottom:0;left:0;right:0;height:68px;border-top:1px solid #e2e6e9;background:white;display:flex;align-items:center;justify-content:space-around;font-size:11px;color:#667}.nav b{color:var(--n)}
+.badge{position:fixed;right:12px;bottom:12px;background:white;border-radius:8px;padding:7px 10px;font-size:10px;color:#777}
+
+.geo{margin-top:22px}
+.asset-label{display:flex;align-items:center;gap:8px}
+.asset-dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:0 0 10px}
+.dot-oblig{background:#315fbd}
+.dot-actions{background:#60a0e8}
+.dot-div{background:#d6a33a}
+.dot-cash{background:#59b995}
+.geo-title,.asset-title{color:var(--n);font-size:17px;font-weight:bold;margin:8px 0 14px}
+.geo-row{display:grid;grid-template-columns:105px 1fr 38px;gap:8px;align-items:center;margin:10px 0;font-size:12px}
+.geo-bar{height:9px;background:#e7ebef;border-radius:8px;overflow:hidden}
+.geo-fill{height:100%;background:var(--b);border-radius:8px}
+.geo-pct{text-align:right;font-weight:bold;color:var(--n)}
+</style></head><body><div class="wrap"><div class="phone">
+<section class="s hero on" id="s1"><div class="logo">ACCESS <i>UMOA</i></div><div class="tag">Votre patrimoine peut commencer avec <b>1 000 FCFA</b></div><div class="promise">▣ Investissez simplement<br>◉ Épargnez régulièrement<br>◌ Construisez votre avenir</div><button class="btn gold" onclick="go(2)">Commencer à investir</button><p class="muted" style="color:#d9e3ef">Prototype de démonstration — aucune transaction financière réelle n’est exécutée</p></section>
+<section class="s" id="s2"><div class="top"><span class="back" onclick="go(1)">‹</span>Votre objectif</div><h1>Pourquoi souhaitez-vous investir ?</h1><p class="muted">Sélectionnez l'objectif qui vous importe le plus.</p><div class="cards"><div class="card sel" onclick="pick(this)"><b>Construire mon patrimoine</b><p class="muted">Faire fructifier mon épargne dans le temps</p></div><div class="card" onclick="pick(this)"><b>Préparer ma retraite</b></div><div class="card" onclick="pick(this)"><b>Réaliser un projet futur</b></div><div class="card" onclick="pick(this)"><b>Pour mon enfant</b></div></div><button class="btn primary" onclick="go(3)">Continuer</button></section>
+<section class="s" id="s3"><div class="top"><span class="back" onclick="go(2)">‹</span>Premier investissement</div><h1>Combien souhaitez-vous investir aujourd'hui ?</h1><p class="muted">Vous pouvez commencer dès 1 000 FCFA.</p><div class="amounts"><div class="amtbox" onclick="setAmt(this,1000)">1 000<br>FCFA</div><div class="amtbox" onclick="setAmt(this,2500)">2 500<br>FCFA</div><div class="amtbox sel" onclick="setAmt(this,5000)">5 000<br>FCFA</div><div class="amtbox" onclick="setAmt(this,10000)">10 000<br>FCFA</div></div><div class="note">Votre argent est investi dans un portefeuille diversifié. La diversification ne supprime pas le risque de perte en capital.</div><button class="btn primary" onclick="go(4)">Continuer</button></section>
+<section class="s" id="s4"><div class="top"><span class="back" onclick="go(3)">‹</span>Épargne progressive</div><h1>À quelle fréquence souhaitez-vous investir ?</h1><div class="cards"><div class="card" onclick="setFreq(this,'Une fois')"><b>Investissement unique</b></div><div class="card sel" onclick="setFreq(this,'Chaque mois')"><b>Chaque mois</b><p class="muted">Investissez automatiquement tous les mois</p></div><div class="card" onclick="setFreq(this,'Chaque semaine')"><b>Chaque semaine</b></div></div><button class="btn primary" onclick="go(5)">Continuer</button></section>
+<section class="s" id="s5"><div class="top"><span class="back" onclick="go(4)">‹</span>Mobile Money</div><h1>Choisissez votre moyen de paiement</h1><p class="muted">Choisissez le compte à utiliser pour votre investissement.</p><div class="cards"><div class="card sel" onclick="pick(this)"><b>Mobile Money</b><p class="muted">Compte mobile associé à votre numéro</p></div><div class="card" onclick="pick(this)"><b>Compte bancaire</b></div></div><div class="card" style="margin-top:15px"><b>Numéro de téléphone</b><p class="muted">97 12 34 56</p></div><button class="btn primary" onclick="go(6)">Investir <span class="A">5 000</span> FCFA</button></section>
+<section class="s confirm" id="s6"><div class="check">✓</div><h1>Félicitations !</h1><p>Votre investissement de <b><span class="A">5 000</span> FCFA</b> a bien été enregistré.</p><div class="panel"><div class="row"><span>Montant</span><b><span class="A">5 000</span> FCFA</b></div><div class="row"><span>Fréquence</span><b class="F">Chaque mois</b></div><div class="row"><span>Mode</span><b>Mobile Money</b></div></div><button class="btn gold" onclick="go(7)">Voir mon ACCESS</button></section>
+<section class="s" id="s7"><div class="top">Mon ACCESS</div><div class="head"><div>Valeur actuelle de mon portefeuille</div><div class="value">127 450 FCFA</div><div class="green">+7 450 FCFA (+6,2 %)</div></div><div class="row"><span>Total versé</span><b>120 000 FCFA</b></div><div class="row"><span>Prochain investissement</span><b><span class="A">5 000</span> FCFA</b></div><div class="row"><span>Programme</span><b class="F">Chaque mois</b></div><button class="btn gold" onclick="go(3)">Investir maintenant</button><button class="btn outline" onclick="go(8)">Voir mon portefeuille</button><button class="btn outline" onclick="go(9)">Simuler mon avenir</button><div class="nav"><b>Accueil</b><span onclick="go(8)">Portefeuille</span><span onclick="go(3)">Investir</span><span onclick="go(10)">Activité</span></div></section>
+<section class="s" id="s8">
+<div class="top"><span class="back" onclick="go(7)">‹</span>Mon portefeuille</div>
+<h1>Où est investi mon argent ?</h1>
+
+<div class="asset-title">Répartition par type d'actifs</div>
+<div class="donut"></div>
+<div class="row"><span class="asset-label"><i class="asset-dot dot-oblig"></i>OPCVM Obligations</span><b>40 %</b></div>
+<div class="row"><span class="asset-label"><i class="asset-dot dot-actions"></i>OPCVM Actions</span><b>30 %</b></div>
+<div class="row"><span class="asset-label"><i class="asset-dot dot-div"></i>OPCVM Diversifiés</span><b>20 %</b></div>
+<div class="row"><span class="asset-label"><i class="asset-dot dot-cash"></i>Liquidités</span><b>10 %</b></div>
+
+<div class="geo">
+<div class="geo-title">Répartition géographique</div>
+
+<div class="geo-row"><span>Côte d’Ivoire</span><div class="geo-bar"><div class="geo-fill" style="width:100%"></div></div><span class="geo-pct">30 %</span></div>
+<div class="geo-row"><span>Sénégal</span><div class="geo-bar"><div class="geo-fill" style="width:67%"></div></div><span class="geo-pct">20 %</span></div>
+<div class="geo-row"><span>Bénin</span><div class="geo-bar"><div class="geo-fill" style="width:50%"></div></div><span class="geo-pct">15 %</span></div>
+<div class="geo-row"><span>Togo</span><div class="geo-bar"><div class="geo-fill" style="width:33%"></div></div><span class="geo-pct">10 %</span></div>
+<div class="geo-row"><span>Burkina Faso</span><div class="geo-bar"><div class="geo-fill" style="width:33%"></div></div><span class="geo-pct">10 %</span></div>
+<div class="geo-row"><span>Mali</span><div class="geo-bar"><div class="geo-fill" style="width:23%"></div></div><span class="geo-pct">7 %</span></div>
+<div class="geo-row"><span>Niger</span><div class="geo-bar"><div class="geo-fill" style="width:17%"></div></div><span class="geo-pct">5 %</span></div>
+<div class="geo-row"><span>Guinée-Bissau</span><div class="geo-bar"><div class="geo-fill" style="width:10%"></div></div><span class="geo-pct">3 %</span></div>
+</div>
+
+<div class="note">Répartition indicative du portefeuille. Les expositions peuvent évoluer dans le temps selon les décisions de gestion. Données fictives utilisées pour ce prototype.</div>
+
+<div class="nav"><span onclick="go(7)">Accueil</span><b>Portefeuille</b><span onclick="go(3)">Investir</span><span onclick="go(10)">Activité</span></div>
+</section>
+<section class="s" id="s9"><div class="top"><span class="back" onclick="go(7)">‹</span>Simulateur</div><h1>Mon avenir</h1><div class="sim">Si vous investissez<div class="big"><span class="A">5 000</span> FCFA / mois</div>pendant 10 ans<hr>Montant total versé<div class="big" id="contrib">600 000 FCFA</div></div><h2>Valeur finale illustrative</h2><div class="scenario"><span>Prudent — 3 % / an</span><b id="r3"></b></div><div class="scenario"><span>Modéré — 6 % / an</span><b id="r6"></b></div><div class="scenario"><span>Dynamique — 9 % / an</span><b id="r9"></b></div><div class="note">Simulations illustratives, hors frais et fiscalité. Ni prévision ni garantie de performance.</div><button class="btn primary" onclick="go(7)">Retour à Mon ACCESS</button></section>
+<section class="s" id="s10"><div class="top"><span class="back" onclick="go(7)">‹</span>Activité</div><h1>Mes opérations</h1><div class="row"><span>28 sept. — Versement programmé</span><b>À venir</b></div><div class="row"><span>28 août — Versement mensuel</span><b class="green">5 000 FCFA</b></div><div class="row"><span>28 juil. — Versement mensuel</span><b class="green">5 000 FCFA</b></div><div class="row"><span>28 juin — Versement mensuel</span><b class="green">5 000 FCFA</b></div><div class="nav"><span onclick="go(7)">Accueil</span><span onclick="go(8)">Portefeuille</span><span onclick="go(3)">Investir</span><b>Activité</b></div></section>
+</div></div><div class="badge">ACCESS UMOA • Prototype de démonstration</div>
+<script>
+let amt=5000,freq="Chaque mois";
+function go(n){document.querySelectorAll('.s').forEach(e=>e.classList.remove('on'));document.getElementById('s'+n).classList.add('on');if(n===9)calc()}
+function pick(e){e.parentElement.querySelectorAll('.card').forEach(x=>x.classList.remove('sel'));e.classList.add('sel')}
+function setAmt(e,v){e.parentElement.querySelectorAll('.amtbox').forEach(x=>x.classList.remove('sel'));e.classList.add('sel');amt=v;document.querySelectorAll('.A').forEach(x=>x.textContent=v.toLocaleString('fr-FR'))}
+function setFreq(e,v){pick(e);freq=v;document.querySelectorAll('.F').forEach(x=>x.textContent=v)}
+function calc(){let m=freq==="Chaque semaine"?amt*52/12:amt;let one=freq==="Une fois";document.getElementById('contrib').textContent=(one?amt:Math.round(m*120)).toLocaleString('fr-FR')+" FCFA";[3,6,9].forEach(q=>{let val;if(one)val=amt*Math.pow(1+q/100,10);else{let r=q/100/12;val=m*((Math.pow(1+r,120)-1)/r)}document.getElementById('r'+q).textContent="≈ "+(Math.round(val/1000)*1000).toLocaleString('fr-FR')+" FCFA"})}
+</script></body></html>
